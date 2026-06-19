@@ -32,8 +32,6 @@ from pyspark.sql import functions as F
 # ====================================================================
 lista_tabelas = spark.catalog.listTables("LH_Silver")
 
-#alteracao
-
 for tabela in lista_tabelas:
     nome_tabela = tabela.name
     
