@@ -1,0 +1,192 @@
+{
+  "properties": {
+    "jobMode": "Batch",
+    "source": {
+      "type": "Parquet",
+      "connectionSettings": {
+        "type": "AzureBlobStorage",
+        "typeProperties": {
+          "containerUri": "https://azureopendatastorage.blob.core.windows.net/mlsamples"
+        }
+      }
+    },
+    "destination": {
+      "type": "LakehouseTable",
+      "connectionSettings": {
+        "type": "Lakehouse",
+        "typeProperties": {
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "artifactId": "fa99ac60-76e9-8c35-4566-1f563e1c0d50",
+          "rootFolder": "Tables"
+        }
+      }
+    },
+    "policy": {
+      "timeout": "0.12:00:00",
+      "retry": 0
+    }
+  },
+  "activities": [
+    {
+      "id": "552b74ce-d1d4-4285-9b42-63f132ad0e1c",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "location": {
+              "type": "AzureBlobStorageLocation",
+              "folderPath": "diabetes",
+              "container": "mlsamples"
+            },
+            "compressionCodec": "snappy"
+          },
+          "storeSettings": {
+            "recursive": false,
+            "wildcardFileName": "*.parquet"
+          }
+        },
+        "destination": {
+          "partitionOption": "None",
+          "writeBehavior": "Overwrite",
+          "datasetSettings": {
+            "schema": "diabetes",
+            "table": "parquet"
+          },
+          "applyVOrder": false
+        },
+        "enableStaging": false,
+        "translator": {
+          "type": "TabularTranslator",
+          "mappings": [
+            {
+              "source": {
+                "name": "AGE",
+                "type": "Int64",
+                "physicalType": "INT64"
+              },
+              "destination": {
+                "name": "AGE",
+                "physicalType": "long"
+              }
+            },
+            {
+              "source": {
+                "name": "SEX",
+                "type": "Int64",
+                "physicalType": "INT64"
+              },
+              "destination": {
+                "name": "SEX",
+                "physicalType": "long"
+              }
+            },
+            {
+              "source": {
+                "name": "BMI",
+                "type": "Double",
+                "physicalType": "DOUBLE"
+              },
+              "destination": {
+                "name": "BMI",
+                "physicalType": "double"
+              }
+            },
+            {
+              "source": {
+                "name": "BP",
+                "type": "Double",
+                "physicalType": "DOUBLE"
+              },
+              "destination": {
+                "name": "BP",
+                "physicalType": "double"
+              }
+            },
+            {
+              "source": {
+                "name": "S1",
+                "type": "Int64",
+                "physicalType": "INT64"
+              },
+              "destination": {
+                "name": "S1",
+                "physicalType": "long"
+              }
+            },
+            {
+              "source": {
+                "name": "S2",
+                "type": "Double",
+                "physicalType": "DOUBLE"
+              },
+              "destination": {
+                "name": "S2",
+                "physicalType": "double"
+              }
+            },
+            {
+              "source": {
+                "name": "S3",
+                "type": "Double",
+                "physicalType": "DOUBLE"
+              },
+              "destination": {
+                "name": "S3",
+                "physicalType": "double"
+              }
+            },
+            {
+              "source": {
+                "name": "S4",
+                "type": "Double",
+                "physicalType": "DOUBLE"
+              },
+              "destination": {
+                "name": "S4",
+                "physicalType": "double"
+              }
+            },
+            {
+              "source": {
+                "name": "S5",
+                "type": "Double",
+                "physicalType": "DOUBLE"
+              },
+              "destination": {
+                "name": "S5",
+                "physicalType": "double"
+              }
+            },
+            {
+              "source": {
+                "name": "S6",
+                "type": "Int64",
+                "physicalType": "INT64"
+              },
+              "destination": {
+                "name": "S6",
+                "physicalType": "long"
+              }
+            },
+            {
+              "source": {
+                "name": "Y",
+                "type": "Int64",
+                "physicalType": "INT64"
+              },
+              "destination": {
+                "name": "Y",
+                "physicalType": "long"
+              }
+            }
+          ]
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    }
+  ]
+}
